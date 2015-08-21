@@ -1,8 +1,7 @@
 import React from 'react';
+import Root from './containers/root.jsx';
 
-import Routes from './routes';
-
-let rootEl = document.getElementById('root');
-
-console.log('start');
-React.render(<Routes />, rootEl);
+React.render(
+  <Root />,
+  document.getElementById('root')
+);
