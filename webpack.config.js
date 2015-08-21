@@ -1,7 +1,8 @@
+'use strict';
+
 module.exports = {
-  entry: './src/index.jsx',
+  entry: './src/app.jsx',
   output: {
-    path: './build/',
     filename: 'bundle.js',
   },
   module: {
