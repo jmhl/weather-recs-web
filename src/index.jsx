@@ -1,7 +1,14 @@
 import React from 'react';
-import Root from './containers/root.jsx';
+import Router, { DefaultRoute, Route } from 'react-router';
+import App from './app.jsx';
+import Dashboard from './components/dashboard.jsx';
 
-React.render(
-  <Root />,
-  document.getElementById('root')
+let routes = (
+  <Route handler={App}>
+    <DefaultRoute handler={Dashboard} />
+  </Route>
 );
+
+Router.run(routes, (Handler) => {
+  React.render(<Handler />, document.getElementById('root'));
+});
