@@ -15,7 +15,7 @@ gulp.task('webpack', function() {
 });
 
 gulp.task('sass', function() {
-  gulp.src('./src/scss/**/*.scss')
+  gulp.src('./src/scss/app.scss')
     .pipe(gulp.dest('./build'));
 });
 

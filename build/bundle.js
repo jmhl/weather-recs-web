@@ -52,13 +52,9 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	// import Router from 'react-router';
-
 	var _reactRouter = __webpack_require__(157);
 
 	var _reactRouter2 = _interopRequireDefault(_reactRouter);
-
-	// import Root from './containers/root.jsx';
 
 	var _appJsx = __webpack_require__(196);
 
@@ -74,7 +70,6 @@
 	  _react2['default'].createElement(_reactRouter.DefaultRoute, { handler: _componentsDashboardJsx2['default'] })
 	);
 
-	console.log(_reactRouter2['default']);
 	_reactRouter2['default'].run(routes, function (Handler) {
 	  _react2['default'].render(_react2['default'].createElement(Handler, null), document.getElementById('root'));
 	});
@@ -23625,25 +23620,29 @@
 /* 197 */
 /***/ function(module, exports, __webpack_require__) {
 
-	"use strict";
+	'use strict';
 
-	Object.defineProperty(exports, "__esModule", {
+	Object.defineProperty(exports, '__esModule', {
 	  value: true
 	});
 
-	var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+	var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
 
-	var _get = function get(_x, _x2, _x3) { var _again = true; _function: while (_again) { var object = _x, property = _x2, receiver = _x3; desc = parent = getter = undefined; _again = false; if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { _x = parent; _x2 = property; _x3 = receiver; _again = true; continue _function; } } else if ("value" in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } } };
+	var _get = function get(_x, _x2, _x3) { var _again = true; _function: while (_again) { var object = _x, property = _x2, receiver = _x3; desc = parent = getter = undefined; _again = false; if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { _x = parent; _x2 = property; _x3 = receiver; _again = true; continue _function; } } else if ('value' in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } } };
 
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
 
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 	var _react = __webpack_require__(1);
 
 	var _react2 = _interopRequireDefault(_react);
+
+	var _mocksEs6 = __webpack_require__(198);
+
+	var _mocksEs62 = _interopRequireDefault(_mocksEs6);
 
 	var Dashboard = (function (_Component) {
 	  _inherits(Dashboard, _Component);
@@ -23651,16 +23650,17 @@
 	  function Dashboard() {
 	    _classCallCheck(this, Dashboard);
 
-	    _get(Object.getPrototypeOf(Dashboard.prototype), "constructor", this).apply(this, arguments);
+	    _get(Object.getPrototypeOf(Dashboard.prototype), 'constructor', this).apply(this, arguments);
 	  }
 
 	  _createClass(Dashboard, [{
-	    key: "render",
+	    key: 'render',
 	    value: function render() {
-	      return _react2["default"].createElement(
-	        "div",
-	        { className: "dashboard" },
-	        "hi"
+	      return _react2['default'].createElement(
+	        'div',
+	        { className: 'dashboard' },
+	        this.props.temperature.formatted,
+	        'hi'
 	      );
 	    }
 	  }]);
@@ -23668,8 +23668,39 @@
 	  return Dashboard;
 	})(_react.Component);
 
-	exports["default"] = Dashboard;
-	module.exports = exports["default"];
+	exports['default'] = Dashboard;
+
+	Dashboard.propTypes = {
+	  temperature: _react.PropTypes.shape({
+	    formatted: _react.PropTypes.string.isRequired,
+	    measure: _react.PropTypes.number.isRequired,
+	    unit: _react.PropTypes.string.isRequired
+	  }).isRequired
+	};
+
+	Dashboard.defaultProps = {
+	  temperature: _mocksEs62['default'].temperature
+	};
+	module.exports = exports['default'];
+
+/***/ },
+/* 198 */
+/***/ function(module, exports) {
+
+	'use strict';
+
+	Object.defineProperty(exports, '__esModule', {
+	  value: true
+	});
+	var dashboardResponse = {
+	  temperature: {
+	    formatted: '70C',
+	    measure: 70,
+	    unit: 'C'
+	  }
+	};
+	exports['default'] = dashboardResponse;
+	module.exports = exports['default'];
 
 /***/ }
 /******/ ]);
