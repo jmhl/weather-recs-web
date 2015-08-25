@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react';
-
+import { connect } from 'react-redux';
 import Error from './common/error.jsx';
 import Loader from './common/loader.jsx';
 import dashboardResponse from '../mocks.es6';
