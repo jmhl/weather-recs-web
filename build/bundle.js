@@ -23640,27 +23640,74 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _mocksEs6 = __webpack_require__(198);
+	var _commonErrorJsx = __webpack_require__(198);
+
+	var _commonErrorJsx2 = _interopRequireDefault(_commonErrorJsx);
+
+	var _commonLoaderJsx = __webpack_require__(199);
+
+	var _commonLoaderJsx2 = _interopRequireDefault(_commonLoaderJsx);
+
+	var _mocksEs6 = __webpack_require__(200);
 
 	var _mocksEs62 = _interopRequireDefault(_mocksEs6);
 
 	var Dashboard = (function (_Component) {
 	  _inherits(Dashboard, _Component);
 
-	  function Dashboard() {
+	  function Dashboard(props) {
 	    _classCallCheck(this, Dashboard);
 
-	    _get(Object.getPrototypeOf(Dashboard.prototype), 'constructor', this).apply(this, arguments);
+	    _get(Object.getPrototypeOf(Dashboard.prototype), 'constructor', this).call(this, props);
+	    this.locationError = this.locationError.bind(this);
+	    this.locationSuccess = this.locationSuccess.bind(this);
+
+	    this.state = {
+	      // loading, error, success
+	      pageStatus: 'loading'
+	    };
 	  }
 
 	  _createClass(Dashboard, [{
+	    key: 'componentDidMount',
+	    value: function componentDidMount() {
+	      if (navigator && navigator.geolocation) {
+	        navigator.geolocation.getCurrentPosition(this.locationSuccess, this.locationError);
+	      } else {
+	        this.setState({ pageStatus: 'error' });
+	      }
+	    }
+	  }, {
+	    key: 'locationError',
+	    value: function locationError() {
+	      this.setState({ pageStatus: 'error' });
+	    }
+	  }, {
+	    key: 'locationSuccess',
+	    value: function locationSuccess(position) {
+	      console.log(position);
+	      this.setState({
+	        latitude: position.coords.latitude,
+	        pageStatus: 'success',
+	        longitude: position.coords.longitude
+	      });
+	    }
+	  }, {
 	    key: 'render',
 	    value: function render() {
+	      switch (this.state.pageStatus) {
+	        case 'loading':
+	          return _react2['default'].createElement(_commonLoaderJsx2['default'], null);
+	        case 'error':
+	          return _react2['default'].createElement(_commonErrorJsx2['default'], { message: 'Sorry, but we need your location.' });
+	      }
+
+	      var temperature = this.props.temperature;
+
 	      return _react2['default'].createElement(
 	        'div',
 	        { className: 'dashboard' },
-	        this.props.temperature.formatted,
-	        'hi'
+	        this.props.temperature.formatted
 	      );
 	    }
 	  }]);
@@ -23685,6 +23732,116 @@
 
 /***/ },
 /* 198 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+
+	var _get = function get(_x, _x2, _x3) { var _again = true; _function: while (_again) { var object = _x, property = _x2, receiver = _x3; desc = parent = getter = undefined; _again = false; if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { _x = parent; _x2 = property; _x3 = receiver; _again = true; continue _function; } } else if ("value" in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } } };
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var ErrorComponent = (function (_Component) {
+	  _inherits(ErrorComponent, _Component);
+
+	  function ErrorComponent() {
+	    _classCallCheck(this, ErrorComponent);
+
+	    _get(Object.getPrototypeOf(ErrorComponent.prototype), "constructor", this).apply(this, arguments);
+	  }
+
+	  _createClass(ErrorComponent, [{
+	    key: "render",
+	    value: function render() {
+	      return _react2["default"].createElement(
+	        "div",
+	        { className: "error" },
+	        this.props.message
+	      );
+	    }
+	  }]);
+
+	  return ErrorComponent;
+	})(_react.Component);
+
+	exports["default"] = ErrorComponent;
+
+	ErrorComponent.propTypes = {
+	  message: _react.PropTypes.string.isRequired
+	};
+	module.exports = exports["default"];
+
+/***/ },
+/* 199 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, '__esModule', {
+	  value: true
+	});
+
+	var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+
+	var _get = function get(_x, _x2, _x3) { var _again = true; _function: while (_again) { var object = _x, property = _x2, receiver = _x3; desc = parent = getter = undefined; _again = false; if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { _x = parent; _x2 = property; _x3 = receiver; _again = true; continue _function; } } else if ('value' in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } } };
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var Loader = (function (_Component) {
+	  _inherits(Loader, _Component);
+
+	  function Loader() {
+	    _classCallCheck(this, Loader);
+
+	    _get(Object.getPrototypeOf(Loader.prototype), 'constructor', this).apply(this, arguments);
+	  }
+
+	  _createClass(Loader, [{
+	    key: 'render',
+	    value: function render() {
+	      var size = this.props.size || 'large';
+
+	      return _react2['default'].createElement(
+	        'div',
+	        { className: 'loader' },
+	        'Loading...'
+	      );
+	    }
+	  }]);
+
+	  return Loader;
+	})(_react.Component);
+
+	exports['default'] = Loader;
+
+	Loader.propTypes = {
+	  size: _react.PropTypes.string
+	};
+	module.exports = exports['default'];
+
+/***/ },
+/* 200 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -23697,8 +23854,24 @@
 	    formatted: '70C',
 	    measure: 70,
 	    unit: 'C'
-	  }
+	  },
+	  actions: {
+	    next_day: 'next',
+	    previous_day: 'previous'
+	  },
+	  recommendations: [{
+	    id: 123,
+	    name: 'Activity',
+	    uri: 'https://www.google.com',
+	    icon: 'activity',
+	    images: {
+	      '1x': 'http://placehold.it/300x200',
+	      '2x': 'http://placehold.it/600x400'
+	    },
+	    actions: ['accept', 'decline']
+	  }]
 	};
+
 	exports['default'] = dashboardResponse;
 	module.exports = exports['default'];
 

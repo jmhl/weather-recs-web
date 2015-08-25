@@ -15,9 +15,9 @@ let dashboardResponse = {
       uri: 'https://www.google.com',
       icon: 'activity',
       images: {
-        1x: 'http://placehold.it/300x200,
-        2x: 'http://placehold.it/600x400,
-      }
+        '1x': 'http://placehold.it/300x200',
+        '2x': 'http://placehold.it/600x400',
+      },
       actions: [
         'accept',
         'decline',
