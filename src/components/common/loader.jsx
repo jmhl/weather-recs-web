@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 
-export default class Loader extends Component {
+class Loader extends Component {
   render() {
     let size = this.props.size || 'large';
 
@@ -15,3 +15,5 @@ export default class Loader extends Component {
 Loader.propTypes = {
   size: PropTypes.string,
 };
+
+export default Loader;

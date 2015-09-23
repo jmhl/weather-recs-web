@@ -7,9 +7,10 @@ module.exports = {
   },
   module: {
     loaders: [
-      { test: /\.es6$/, loader: 'babel-loader' },
+      { test: /\.es6$/, exclude: /node_modules/, loader: 'babel-loader', query: { stage: 0 } },
+      { test: /\.jsx/, exclude: /node_modules/, loader: 'babel-loader', query: { stage: 0 } },
+      { test: /\.js/, exclude: /node_modules/, loader: 'babel-loader', query: { stage: 0 } },
       { test: /\.json$/, loader: 'json-loader' },
-      { test: /\.jsx$/, loader: 'babel-loader' },
     ]
   },
 };
