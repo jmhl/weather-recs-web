@@ -12,7 +12,7 @@ class WeatherActions {
           longitude,
         },
       })
-        .then(res => console.log(res));
+        .then(res => res.data);
     }
   }
 }

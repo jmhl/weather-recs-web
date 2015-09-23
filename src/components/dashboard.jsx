@@ -1,13 +1,24 @@
 import React, { Component, PropTypes } from 'react';
-import WeatherAction from '../actions/WeatherActions.es6';
+import connectToStores from 'alt/utils/connectToStores';
+import WeatherActions from '../actions/WeatherActions.es6';
+import WeatherStore from '../stores/WeatherStore.es6';
 import Error from './common/error.jsx';
 import Loader from './common/loader.jsx';
 
+// @connectToStores
 class Dashboard extends Component {
   constructor(props) {
     super(props);
     this.locationError = this.locationError.bind(this);
     this.locationSuccess = this.locationSuccess.bind(this);
+  }
+
+  static getStores() {
+    return [WeatherStore];
+  }
+
+  static getPropsFromStores() {
+    return WeatherStore.getState();
   }
 
   componentDidMount() {
@@ -22,13 +33,13 @@ class Dashboard extends Component {
 
   locationSuccess(position) {
     console.log(position);
-    const { dispatch } = this.props;
     let { latitude, longitude } = position.coords;
-    WeatherAction.fetchWeather(latitude, longitude);
+    WeatherActions.fetchWeather(latitude, longitude);
   }
 
   render() {
     console.log('hi');
+    console.log(this.props);
     // let temperature = this.props.temperature;
 
     return (
@@ -47,4 +58,4 @@ class Dashboard extends Component {
 //   }).isRequired,
 // };
 
-export default Dashboard;
+export default connectToStores(Dashboard);
