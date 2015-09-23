@@ -5,7 +5,7 @@ import WeatherStore from '../stores/WeatherStore.es6';
 import Error from './common/error.jsx';
 import Loader from './common/loader.jsx';
 
-// @connectToStores
+@connectToStores
 class Dashboard extends Component {
   constructor(props) {
     super(props);
@@ -23,7 +23,10 @@ class Dashboard extends Component {
 
   componentDidMount() {
     if (navigator && navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(this.locationSuccess, this.locationError);
+      navigator.geolocation.getCurrentPosition(
+        this.locationSuccess,
+        this.locationError
+      );
     }
   }
 
@@ -57,4 +60,5 @@ Dashboard.propTypes = {
   }),
 };
 
-export default connectToStores(Dashboard);
+// export default connectToStores(Dashboard);
+export default Dashboard;

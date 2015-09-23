@@ -3,9 +3,11 @@ import WeatherActions from '../actions/WeatherActions.es6';
 
 class WeatherStore {
   constructor() {
-    this.bindListeners({
-      updateWeather: WeatherActions.fetchWeather,
-    });
+    // this.bindListeners({
+    //   updateWeather: WeatherActions.fetchWeather,
+    // });
+
+    this.bindActions(alt.getActions('WeatherActions'));
 
     this.state = {
       weather: {},
@@ -13,6 +15,7 @@ class WeatherStore {
   }
 
   updateWeather(weather) {
+    console.log('updating weather');
     this.setState({ weather: weather });
   }
 }

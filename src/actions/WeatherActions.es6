@@ -4,16 +4,20 @@ import axios from 'axios';
 const HOST = 'http://localhost:3000';
 
 class WeatherActions {
+  constructor() {
+    this.generateActions('updateWeather');
+  }
+
   fetchWeather(latitude, longitude) {
-    return dispatch => {
+    // return dispatch => {
       return axios.get(`${HOST}/weather/`, {
         params: {
           latitude,
           longitude,
         },
       })
-        .then(res => res.data);
-    }
+        .then(res => this.actions.updateWeather(res.data));
+    // }
   }
 }
 
