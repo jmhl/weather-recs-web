@@ -50,12 +50,11 @@ class Dashboard extends Component {
   }
 }
 
-// Dashboard.propTypes = {
-//   temperature: PropTypes.shape({
-//     formatted: PropTypes.string.isRequired,
-//     measure: PropTypes.number.isRequired,
-//     unit: PropTypes.string.isRequired,
-//   }).isRequired,
-// };
+Dashboard.propTypes = {
+  params: PropTypes.object.isRequired,
+  query: PropTypes.object.isRequired,
+  weather: PropTypes.shape({
+  }),
+};
 
 export default connectToStores(Dashboard);
