@@ -4,6 +4,7 @@ import WeatherActions from '../actions/WeatherActions.es6';
 import WeatherStore from '../stores/WeatherStore.es6';
 import Error from './common/error.jsx';
 import Loader from './common/loader.jsx';
+import Weather from './weather.jsx';
 
 @connectToStores
 class Dashboard extends Component {
@@ -44,10 +45,19 @@ class Dashboard extends Component {
     console.log('hi');
     console.log(this.props);
     // let temperature = this.props.temperature;
+    let {
+      apparentTemperature,
+      humidity,
+      icon,
+      precipProbability,
+      summary,
+      temperature,
+      windSpeed,
+    } = this.props.weather;
 
     return (
       <div className="dashboard">
-        hihihi
+        <Weather />
       </div>
     );
   }
@@ -57,8 +67,14 @@ Dashboard.propTypes = {
   params: PropTypes.object.isRequired,
   query: PropTypes.object.isRequired,
   weather: PropTypes.shape({
+    apparentTemperature: PropTypes.num,
+    humidity: PropTypes.num,
+    icon: PropTypes.string,
+    precipProbability: PropTypes.num,
+    summary: PropTypes.string,
+    temperature: PropTypes.num,
+    windSpeed: PropTypes.num,
   }),
 };
 
-// export default connectToStores(Dashboard);
 export default Dashboard;

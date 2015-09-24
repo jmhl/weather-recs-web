@@ -9,15 +9,13 @@ class WeatherActions {
   }
 
   fetchWeather(latitude, longitude) {
-    // return dispatch => {
-      return axios.get(`${HOST}/weather/`, {
-        params: {
-          latitude,
-          longitude,
-        },
-      })
-        .then(res => this.actions.updateWeather(res.data));
-    // }
+    return axios.get(`${HOST}/weather/`, {
+      params: {
+        latitude,
+        longitude,
+      },
+    })
+      .then(res => this.actions.updateWeather(res.data.currently));
   }
 }
 

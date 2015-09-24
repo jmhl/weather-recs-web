@@ -3,10 +3,6 @@ import WeatherActions from '../actions/WeatherActions.es6';
 
 class WeatherStore {
   constructor() {
-    // this.bindListeners({
-    //   updateWeather: WeatherActions.fetchWeather,
-    // });
-
     this.bindActions(alt.getActions('WeatherActions'));
 
     this.state = {
